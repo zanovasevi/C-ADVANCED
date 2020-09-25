@@ -1,0 +1,25 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _05.Print_Even_Numbers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string input = Console.ReadLine();
+            string[] splitted = input.Split();
+            Queue<int> queue = new Queue<int>();
+            for(int i = 0; i < splitted.Length; i++)
+            {
+                int number = int.Parse(splitted[i]);
+                if(number % 2 == 0)
+                {
+                    queue.Enqueue(number);
+                }
+            }
+            Console.WriteLine(String.Join(", ", queue));
+        }
+    }
+}
