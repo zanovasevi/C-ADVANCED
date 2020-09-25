@@ -1,0 +1,18 @@
+using System;
+using System.Collections.Generic;
+
+namespace _01.Reversed_Strings
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string input = Console.ReadLine();
+            Stack<char> characters = new Stack<char>(input);
+            foreach(var item in characters)
+            {
+                Console.Write(item);
+            }
+        }
+    }
+}
