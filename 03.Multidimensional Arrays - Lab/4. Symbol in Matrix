@@ -1,0 +1,47 @@
+using System;
+using System.Linq;
+
+namespace _04.Symbol_in_Matrix
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int sizeMatrix = int.Parse(Console.ReadLine());
+            string[,] matrix = new string[sizeMatrix, sizeMatrix];
+            for(int row = 0; row < sizeMatrix; row++)
+            {
+                string symbols = Console.ReadLine();
+                string[] arr = new string[symbols.Length];
+
+                for(int i = 0; i < symbols.Length; i++)
+                {
+                    arr[i] = symbols[i].ToString();
+                }
+                for (int col = 0; col < sizeMatrix; col++)
+                {
+                    matrix[row, col] = arr[col];
+                }
+            }
+            string input = Console.ReadLine();
+            if(matrix.Cast<string>().Contains(input))
+            {
+                for(int row = 0; row < sizeMatrix; row++)
+                {
+                    for (int col = 0; col < sizeMatrix; col++)
+                    {
+                        if (matrix[row,col] == input)
+                        {
+                            Console.WriteLine($"({row}, {col})");
+                            return;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"{input} does not occur in the matrix");
+            }
+        }
+    }
+}
