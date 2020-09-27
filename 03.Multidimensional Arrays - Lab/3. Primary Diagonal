@@ -1,0 +1,28 @@
+using System;
+using System.Linq;
+
+namespace _03.Primary_Diagonal
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int sizeMatrix = int.Parse(Console.ReadLine());
+            int[,] matrix = new int[sizeMatrix, sizeMatrix];
+            for(int row = 0; row < sizeMatrix; row++)
+            {
+                int[] numbers = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                for(int col = 0; col < sizeMatrix; col++)
+                {
+                    matrix[row, col] = numbers[col];
+                }
+            }
+            int sumDiagonal = 0;
+            for(int i = 0; i < sizeMatrix; i++)
+            {
+                sumDiagonal += matrix[i, i];
+            }
+            Console.WriteLine(sumDiagonal);
+        }
+    }
+}
