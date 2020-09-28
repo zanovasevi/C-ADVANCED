@@ -1,0 +1,79 @@
+using System;
+using System.Linq;
+
+namespace _13.Jagged_Array_Manipulator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int rows = int.Parse(Console.ReadLine());
+
+            double[][] matrix = new double[rows][];
+            for (int row = 0; row < matrix.Length; row++)
+            {
+                int[] rowData = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                matrix[row] = new double[rowData.Length];
+                for (int col = 0; col < rowData.Length; col++)
+                {
+                    matrix[row][col] = rowData[col];
+                }
+            }
+
+            for(int row = 0; row < rows - 1; row++)
+            {
+                if(matrix[row].Length == matrix[row + 1].Length)
+                {
+                    for (int roW = row; roW < row + 2; roW++)
+                    {
+                        for (int coL = 0; coL < matrix[roW].Length; coL++)
+                        {
+                            matrix[roW][coL] *= 2;
+                        }
+                    }
+                }
+                else
+                {
+                    for (int roW = row; roW < row + 2; roW++)
+                    {
+                        for (int coL = 0; coL < matrix[roW].Length; coL++)
+                        {
+                            matrix[roW][coL] /= 2;
+                        }
+                    }
+                }
+            }
+
+            string input = Console.ReadLine();
+            while(input != "End")
+            {
+                string[] splitted = input.Split();
+                string command = splitted[0];
+                int row = int.Parse(splitted[1]);
+                int col = int.Parse(splitted[2]);
+                int value = int.Parse(splitted[3]);
+
+                if(row < 0 || row > rows || col < 0 || col > matrix.Length)
+                {
+                    input = Console.ReadLine();
+                    continue;
+                }
+
+                if(command == "Add")
+                {
+                    matrix[row][col] += value;
+                }
+                else if(command == "Subtract")
+                {
+                    matrix[row][col] -= value;
+                }
+
+                input = Console.ReadLine();
+            }
+            foreach(var item in matrix)
+            {
+                Console.WriteLine(string.Join(" ", item));
+            }
+        }
+    }
+}
