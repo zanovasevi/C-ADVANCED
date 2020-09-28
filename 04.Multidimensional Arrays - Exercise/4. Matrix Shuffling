@@ -1,0 +1,69 @@
+using System;
+using System.Linq;
+
+namespace _11.Matrix_Shuffling
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] dimensionsMatrix = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            int rows = dimensionsMatrix[0];
+            int cols = dimensionsMatrix[1];
+            string[,] matrix = new string[rows, cols];
+
+            for(int row = 0; row < rows; row++)
+            {
+                string[] input = Console.ReadLine().Split();
+                for(int col = 0; col < cols; col++)
+                {
+                    matrix[row, col] = input[col];
+                }
+            }
+
+            string secondInput = Console.ReadLine();
+            while(secondInput != "END")
+            {
+                string[] splitted = secondInput.Split();
+                string command = splitted[0];
+                
+                if(command != "swap" || splitted.Length != 5)
+                {
+                    Console.WriteLine("Invalid input!");
+                    secondInput = Console.ReadLine();
+                    continue;
+                }
+
+                int row = int.Parse(splitted[1]);
+                int col = int.Parse(splitted[2]);
+                int swapRow = int.Parse(splitted[3]);
+                int swapCol = int.Parse(splitted[4]);
+
+                if(row < 0 || row > rows || col < 0 || col > cols
+                    || swapRow < 0 || swapRow > rows
+                    || swapCol < 0 || swapCol > cols)
+                {
+                    Console.WriteLine("Invalid input!");
+                    secondInput = Console.ReadLine();
+                    continue;
+                }
+                else
+                {
+                    string temp = matrix[swapRow, swapCol];
+                    matrix[swapRow, swapCol] = matrix[row, col];
+                    matrix[row, col] = temp;
+                    for(int i = 0; i < rows; i++)
+                    {
+                        for(int y = 0; y < cols; y++)
+                        {
+                            Console.Write(matrix[i, y] + " ");
+                        }
+                        Console.WriteLine();
+                    }
+                }
+
+                secondInput = Console.ReadLine();
+            }
+        }
+    }
+}
