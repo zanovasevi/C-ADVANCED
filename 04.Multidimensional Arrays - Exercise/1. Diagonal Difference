@@ -1,0 +1,47 @@
+using System;
+using System.Linq;
+
+namespace _08.Diagonal_Difference
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int dimensionMatrix = int.Parse(Console.ReadLine());
+            int[,] matrix = new int[dimensionMatrix, dimensionMatrix];
+            InsertElementsInMatrix(dimensionMatrix, matrix);
+
+            int sumFirstDiagonal = 0;
+            int sumSecondDiagonal = 0;
+
+            for(int i = 0; i < dimensionMatrix; i++)
+            {
+                sumFirstDiagonal += matrix[i, i];
+            }
+
+            for(int row = 0; row < dimensionMatrix; row++)
+            {
+                for(int col = dimensionMatrix - 1; col >= 0; col--)
+                {
+                    sumSecondDiagonal += matrix[row, col];
+                    row++;
+                }
+                break;
+            }
+            int difference = Math.Abs(sumFirstDiagonal - sumSecondDiagonal);
+            Console.WriteLine(difference);
+        }
+
+        static void InsertElementsInMatrix(int dimensionMatrix, int[,] matrix)
+        {
+            for (int row = 0; row < dimensionMatrix; row++)
+            {
+                int[] numbers = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                for (int col = 0; col < dimensionMatrix; col++)
+                {
+                    matrix[row, col] = numbers[col];
+                }
+            }
+        }
+    }
+}
