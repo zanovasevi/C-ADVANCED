@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _02.Average_Student_Grades
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string, List<decimal>> dict = new Dictionary<string, List<decimal>>();
+            int countStudents = int.Parse(Console.ReadLine());
+            for(int i = 0; i < countStudents; i++)
+            {
+                string[] input = Console.ReadLine().Split();
+                string name = input[0];
+                decimal grade = decimal.Parse(input[1]);
+                grade = Math.Round(grade, 3);
+
+                if(!dict.ContainsKey(name))
+                {
+                    dict.Add(name, new List<decimal>());
+                    dict[name].Add(grade);
+                }
+                else
+                {
+                    dict[name].Add(grade);
+                }
+            }
+            
+            foreach(var name in dict)
+            {
+                Console.WriteLine($"{name.Key} -> {String.Join(" ", name.Value.Select(x => x.ToString("F2")))} (avg: {name.Value.Average():F2})");
+            }
+        }
+    }
+}
