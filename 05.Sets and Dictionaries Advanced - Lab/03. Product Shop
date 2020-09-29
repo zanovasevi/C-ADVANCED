@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _03.Product_Shop
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string, Dictionary<string, double>> dict = new Dictionary<string, Dictionary<string, double>>();
+            string input = Console.ReadLine();
+            while(input != "Revision")
+            {
+                string[] splitted = input.Split(", ", StringSplitOptions.RemoveEmptyEntries);
+                string shop = splitted[0];
+                string product = splitted[1];
+                double price = double.Parse(splitted[2]);
+
+                if(!dict.ContainsKey(shop))
+                {
+                    dict.Add(shop, new Dictionary<string, double>());
+                    dict[shop].Add(product, price);
+                }
+                else
+                {
+                    dict[shop].Add(product, price);
+                }
+
+                input = Console.ReadLine();
+            }
+
+            foreach(var shop in dict.OrderBy(x => x.Key))
+            {
+                Console.WriteLine($"{shop.Key}->");
+                foreach(var item in shop.Value)
+                {
+                    Console.WriteLine($"Product: {item.Key}, Price: {item.Value}");
+                }
+            }
+        }
+    }
+}
