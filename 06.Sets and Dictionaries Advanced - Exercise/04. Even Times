@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+
+namespace _11.Even_Times
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            var dict = new Dictionary<string, int>();
+            for(int i = 0; i < n; i++)
+            {
+                string number = Console.ReadLine();
+                if(!dict.ContainsKey(number))
+                {
+                    dict.Add(number, 1);
+                }
+                else
+                {
+                    dict[number]++;
+                }
+            }
+            foreach(var item in dict)
+            {
+                if(item.Value % 2 == 0)
+                {
+                    Console.WriteLine(item.Key);
+                }
+            }
+        }
+    }
+}
