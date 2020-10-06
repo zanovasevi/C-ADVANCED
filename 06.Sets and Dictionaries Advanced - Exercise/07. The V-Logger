@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Demo2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var dict = new Dictionary<string, Dictionary<string, HashSet<string>>>();
+            string input = Console.ReadLine();
+            while(input != "Statistics")
+            {
+                string[] splitted = input.Split();
+                string vlogger = splitted[0];
+                string command = splitted[1];
+                if(command == "joined")
+                {
+                    if(!dict.ContainsKey(vlogger))
+                    {
+                        dict.Add(vlogger, new Dictionary<string, HashSet<string>>());
+                        dict[vlogger].Add("followers", new HashSet<string>());
+                        dict[vlogger].Add("following", new HashSet<string>());
+                    }
+                }
+                else if(command == "followed")
+                {
+                    string secondVlogger = splitted[2];
+
+                    if(dict.ContainsKey(vlogger) && dict.ContainsKey(secondVlogger)
+                        && vlogger != secondVlogger)
+                    {
+                        dict[vlogger]["following"].Add(secondVlogger);
+                        dict[secondVlogger]["followers"].Add(vlogger);
+                    }
+                }
+
+
+                input = Console.ReadLine();
+            }
+            Console.WriteLine($"The V-Logger has a total of {dict.Count} vloggers in its logs.");
+
+            int num = 1;
+
+            foreach(var vlogger in dict.OrderByDescending(v => v.Value["followers"].Count).ThenBy(v => v.Value["following"].Count))
+            {
+                Console.WriteLine($"{num}. {vlogger.Key} : {vlogger.Value["followers"].Count} followers, {vlogger.Value["following"].Count} following");
+
+                if(num == 1)
+                {
+                    foreach(var follower in vlogger.Value["followers"].OrderBy(f => f))
+                    {
+                        Console.WriteLine($"*  {follower}");
+                    }
+                }
+
+                num++;
+            }
+        }
+    }
+}
