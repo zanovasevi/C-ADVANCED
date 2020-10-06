@@ -1,0 +1,31 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _09.Sets_of_Elements
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] input = Console.ReadLine().Split();
+            int firstSet = int.Parse(input[0]);
+            int secondSet = int.Parse(input[1]);
+            var firstHashSet = new HashSet<string>();
+            var secondHashSet = new HashSet<string>();
+            var list = new List<string>();
+
+            for (int i = 0; i < firstSet; i++)
+            {
+                string firstNumbers = Console.ReadLine();
+                firstHashSet.Add(firstNumbers);
+            }
+            for(int i = 0; i < secondSet; i++)
+            {
+                string secondNumbers = Console.ReadLine();
+                secondHashSet.Add(secondNumbers);
+            }
+            Console.WriteLine(string.Join(" ", firstHashSet.Intersect(secondHashSet)));
+        }
+    }
+}
