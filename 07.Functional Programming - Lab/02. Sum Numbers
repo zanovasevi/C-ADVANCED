@@ -1,0 +1,38 @@
+using System;
+using System.Linq;
+
+namespace _02.Sum_Numbers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] array = Console.ReadLine().Split(", ").Select(Parser).ToArray();
+
+            PrintResult(array, GetCount, Sum);
+
+        }
+
+        static int GetCount(int[] array)
+        {
+            return array.Length;
+        }
+
+        static int Sum(int[] array)
+        {
+            return array.Sum();
+        }
+
+        static void PrintResult(int[] array, Func<int[], int> count,
+            Func<int[], int> sum)
+        {
+            Console.WriteLine(count(array));
+            Console.WriteLine(sum(array));
+        }
+
+        static int Parser(string x)
+        {
+            return int.Parse(x);
+        }
+    }
+}
