@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _10.Applied_Arithmetics
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Func<int, int> addFunc = x => x + 1;
+            Func<int, int> multiplyFunc = x => x * 2;
+            Func<int, int> subtractFunc = x => x - 1;
+            Action<List<int>> printFunc = x => Console.WriteLine(string.Join(" ", x));
+
+            List<int> numbers = Console.ReadLine().Split().Select(int.Parse).ToList();
+
+            string command = Console.ReadLine();
+            while(command != "end")
+            {
+                if(command == "add")
+                {
+                    numbers = numbers.Select(addFunc).ToList();
+                }
+                else if(command == "multiply")
+                {
+                    numbers = numbers.Select(multiplyFunc).ToList();
+                }
+                else if(command == "subtract")
+                {
+                    numbers = numbers.Select(subtractFunc).ToList();
+                }
+                else if(command == "print")
+                {
+                    printFunc(numbers);
+                }
+
+                command = Console.ReadLine();
+            }
+        }
+    }
+}
