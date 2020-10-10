@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _14.List_of_Predicates
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> dividedNumbers = new List<int>();
+
+            int endNum = int.Parse(Console.ReadLine());
+            List<int> numbers = Console.ReadLine().Split().Select(int.Parse).ToList();
+
+            Func<int, int, bool> predicate = (x, y) => x % y == 0;
+
+            bool checker = true;
+
+            for (int i = 1; i <= endNum; i++)
+            {
+                for(int y = 0; y < numbers.Count; y++)
+                {
+                    if (predicate(i, numbers[y]))
+                    {
+                        checker = true;
+                        
+                    }
+                    else
+                    {
+                        checker = false;
+                        break;
+                    }
+                }
+
+                if(checker)
+                {
+                    dividedNumbers.Add(i);
+                }
+                
+            }
+
+            Console.WriteLine(string.Join(" ", dividedNumbers));
+        }
+    }
+}
