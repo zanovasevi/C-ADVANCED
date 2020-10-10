@@ -1,0 +1,16 @@
+using System;
+
+namespace _06_01.Action_Print
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] input = Console.ReadLine().Split();
+
+            Action<string[]> printer = a => Console.WriteLine(string.Join(Environment.NewLine, a));
+
+            printer(input);
+        }
+    }
+}
