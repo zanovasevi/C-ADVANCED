@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _13.Custom_Comparator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] numbers = Console.ReadLine().Split().Select(int.Parse).ToArray();
+
+            Array.Sort(numbers);
+
+            Func<int, bool> predicateEven = x => x % 2 == 0;
+            Func<int, bool> predicateOdd = x => x % 2 != 0;
+
+            int[] evenNumbers = numbers.Where(predicateEven).ToArray();
+            int[] oddNumbers = numbers.Where(predicateOdd).ToArray();
+
+            Console.Write(string.Join(" ", evenNumbers));
+            Console.Write(" ");
+            Console.WriteLine(string.Join(" ", oddNumbers));
+        }
+    }
+}
