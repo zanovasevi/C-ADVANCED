@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _09.Find_Evens_or_Odds
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] input = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            int lowerNum = input[0];
+            int upperNum = input[1];
+
+            string condition = Console.ReadLine();
+
+            Func<int, int, List<int>> generateList = (lowerNum, upperNum) =>
+            {
+                List<int> nums = new List<int>();
+
+                for(int i = lowerNum; i <= upperNum; i++)
+                {
+                    nums.Add(i);
+                }
+
+                return nums;
+            };
+
+            List<int> numbers = generateList(lowerNum, upperNum);
+
+            Func<int, bool> evenPredicate = n => n % 2 == 0;
+            Func<int, bool> oddPredicate = n => n % 2 != 0;
+
+            if(condition == "even")
+            {
+                numbers = numbers.Where(evenPredicate).ToList();
+            }
+            else if(condition == "odd")
+            {
+                numbers = numbers.Where(oddPredicate).ToList();
+            }
+
+            Console.WriteLine(string.Join(" ", numbers));
+        }
+    }
+}
