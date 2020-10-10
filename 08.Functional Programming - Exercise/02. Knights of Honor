@@ -1,0 +1,23 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace _07_01.Knights_of_Honor
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> input = Console.ReadLine().Split().ToList();
+
+            input = input.Select(x => $"Sir {x}").ToList();
+
+            Action<string[]> printer = a =>
+            {
+                Console.WriteLine(string.Join(Environment.NewLine, a));
+            };
+
+            printer(input.ToArray());
+        }
+    }
+}
