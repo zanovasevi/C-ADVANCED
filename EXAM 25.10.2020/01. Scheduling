@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace exam_01
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] firstInput = Console.ReadLine().Split(", ").Select(int.Parse).ToArray();
+            int[] secondInput = Console.ReadLine().Split(" ").Select(int.Parse).ToArray();
+            int n = int.Parse(Console.ReadLine());
+
+            Stack<int> tasks = new Stack<int>(firstInput);
+            Queue<int> threads = new Queue<int>(secondInput);
+
+            while (true)
+            {
+                int task = tasks.Peek();
+                int thread = threads.Peek();
+
+                if (task == n)
+                {
+                    break;
+                }
+
+                if (thread >= task)
+                {
+                    tasks.Pop();
+                    threads.Dequeue();
+                }
+                else
+                {
+                    threads.Dequeue();
+                }
+            }
+
+            Console.WriteLine($"Thread with value {threads.Peek()} killed task {n}");
+
+            Console.WriteLine(string.Join(" ", threads));
+        }
+    }
+}
